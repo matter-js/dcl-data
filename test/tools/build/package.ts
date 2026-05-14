@@ -13,7 +13,13 @@ type BuildInput = {
 
 function sortedJsonLine(obj: object): string {
     const rec = obj as Record<string, unknown>;
-    return JSON.stringify(Object.fromEntries(Object.keys(rec).sort().map(k => [k, rec[k]])));
+    return JSON.stringify(
+        Object.fromEntries(
+            Object.keys(rec)
+                .sort()
+                .map(k => [k, rec[k]]),
+        ),
+    );
 }
 
 function toJsonl(entries: object[]): string {

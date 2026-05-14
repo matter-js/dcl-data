@@ -1,16 +1,16 @@
 export type SeedSource<T> = {
-    builtAt: string;        // ISO 8601 UTC — passed through from manifest
+    builtAt: string; // ISO 8601 UTC — passed through from manifest
     expectedCount: number;
     entries: AsyncIterable<T>;
 };
 
 export type CertEntry = {
-    subjectKeyId: string;   // lowercase hex, no colons
-    derHex: string;         // raw DER as lowercase hex
+    subjectKeyId: string; // lowercase hex, no colons
+    derHex: string; // raw DER as lowercase hex
     kind: "production" | "test";
-    subject?: string;       // X.509 subject DN — informational only
-    issuer?: string;        // X.509 issuer DN — informational only
-    notBefore?: string;     // ISO 8601
+    subject?: string; // X.509 subject DN — informational only
+    issuer?: string; // X.509 issuer DN — informational only
+    notBefore?: string; // ISO 8601
     notAfter?: string;
 };
 
@@ -25,11 +25,11 @@ export type VendorEntry = {
     vendorLandingPageURL?: string;
     creator?: string;
     kind: "production" | "test";
-    [extra: string]: unknown;   // preserve unknown DCL fields — forward-compat
+    [extra: string]: unknown; // preserve unknown DCL fields — forward-compat
 };
 
 export type Manifest = {
-    builtAt: string;            // ISO 8601 UTC
+    builtAt: string; // ISO 8601 UTC
     schemaVersion: number;
     sources: {
         dcl: { url: string; latestBlockHeight?: number };

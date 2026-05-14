@@ -1,0 +1,89 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  issues: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - name: Install baseline for comparison
+        run: |
+          npm install @matter/dcl-data@latest --prefix /tmp/dcl-baseline 2>/dev/null || true
+
+      - name: Build snapshot
+        env:
+          BASELINE_DIR: /tmp/dcl-baseline/node_modules/@matter/dcl-data
+        run: nacho-run tools/build/run.ts
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -f .no-changes ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rebase before publish
+        if: steps.changes.outputs.has_changes == 'true'
+        run: git pull --rebase origin main
+
+      - name: Publish to npm
+        if: steps.changes.outputs.has_changes == 'true'
+        run: nacho-run tools/publish/run.ts
+
+      - name: Read version
+        if: steps.changes.outputs.has_changes == 'true'
+        id: version
+        run: echo "version=$(cat .version)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump
+        if: steps.changes.outputs.has_changes == 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: bump to ${VERSION}"
+          git tag "v${VERSION}"
+          git push --follow-tags
+
+      - name: Create GitHub Release
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          body_path: summary.md
+
+      - name: Open failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue create \
+            --title "Nightly build failed" \
+            --label "nightly-failure" \
+            --body "Build failed. See: ${RUN_URL}"

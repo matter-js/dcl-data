@@ -1,8 +1,8 @@
 import { expect } from "chai";
-import { resolve, dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { writeFile, rm, mkdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
+import { resolve, dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { paaRoots, cdSigners, vendors, readManifest } from "../src/node.js";
 import { DclDataCorruptError } from "../src/types.js";
 
@@ -56,14 +56,23 @@ describe("paaRoots", () => {
                 builtAt: "2026-01-01T00:00:00.000Z",
                 schemaVersion: 1,
                 sources: { dcl: { url: "" }, github: { repo: "", ref: "", commit: "" } },
-                counts: { paaRoots: 2, paaRootsTest: 0, cdSigners: 0, cdSignersTest: 0, vendors: 0, vendorsTest: 0 },
+                counts: {
+                    paaRoots: 2,
+                    paaRootsTest: 0,
+                    cdSigners: 0,
+                    cdSignersTest: 0,
+                    vendors: 0,
+                    vendorsTest: 0,
+                },
             }),
         );
         await writeFile(join(tmpRoot, "data", "paa-roots.jsonl"), '{"valid":true}\nnot-json\n');
         const seed = paaRoots({ packageRoot: tmpRoot, includeTest: true });
         let err: unknown;
         try {
-            for await (const _ of seed.entries) { /* drain */ }
+            for await (const _ of seed.entries) {
+                /* drain */
+            }
         } catch (e) {
             err = e;
         } finally {

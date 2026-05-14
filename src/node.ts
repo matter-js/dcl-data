@@ -1,7 +1,7 @@
 import { createReadStream } from "node:fs";
 import { readFileSync } from "node:fs";
-import { createInterface } from "node:readline";
 import { join, dirname } from "node:path";
+import { createInterface } from "node:readline";
 import { fileURLToPath } from "node:url";
 import type { PaaRootEntry, CdSignerEntry, VendorEntry, Manifest, SeedSource } from "./types.js";
 import { DclDataCorruptError } from "./types.js";
