@@ -7,3 +7,6 @@ manifest.json
 .no-changes
 .version
 summary.md
+.claude/
+.idea/
+docs/
