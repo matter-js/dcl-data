@@ -146,7 +146,7 @@
     },
     {
       "files": [
-        "tests/**/*.ts"
+        "test/**/*.ts"
       ],
       "rules": {
         "no-unused-expressions": "off"
