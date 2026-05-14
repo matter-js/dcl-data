@@ -1,0 +1,16 @@
+{
+  "builtAt": "2026-05-14T02:00:00.000Z",
+  "schemaVersion": 1,
+  "sources": {
+    "dcl": { "url": "https://on.dcl.csa-iot.org" },
+    "github": { "repo": "project-chip/connectedhomeip", "ref": "master", "commit": "abc1234def5678901234" }
+  },
+  "counts": {
+    "paaRoots": 4,
+    "paaRootsTest": 1,
+    "cdSigners": 3,
+    "cdSignersTest": 1,
+    "vendors": 3,
+    "vendorsTest": 1
+  }
+}

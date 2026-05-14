@@ -1,0 +1,4 @@
+{"derHex":"308201aabb","kind":"production","role":"paa","subjectKeyId":"aabbccdd001122334455667701pa"}
+{"derHex":"308201bbcc","kind":"production","notBefore":"2021-06-01T00:00:00.000Z","role":"paa","subjectKeyId":"bbccdd001122334455667702pa"}
+{"derHex":"308201ccdd","kind":"production","role":"paa","subjectKeyId":"ccddee001122334455667703pa"}
+{"derHex":"308201ddee","kind":"test","role":"paa","subjectKeyId":"ddeeff001122334455667704pa"}
