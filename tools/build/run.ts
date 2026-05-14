@@ -42,7 +42,8 @@ async function readBaseline(): Promise<{ dataset: DataSet; manifest: Manifest | 
             dataset: { paaRoots, cdSigners, vendors: JSON.parse(vendorsJson) as VendorEntry[] },
             manifest: JSON.parse(manifestJson) as Manifest,
         };
-    } catch {
+    } catch (err) {
+        console.error("Warning: could not read baseline from BASELINE_DIR, treating as first run:", err);
         return { dataset: { paaRoots: [], cdSigners: [], vendors: [] }, manifest: null };
     }
 }

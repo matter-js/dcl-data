@@ -1,7 +1,7 @@
 /**
- * Nightly publish entry point.
- * Computes CalVer, bumps package.json, builds, and publishes to npm.
- * Writes the version string to .version (CI reads it for git tag + GitHub release).
+ * Nightly version prep.
+ * Computes CalVer, bumps package.json, writes .version.
+ * CI runs `npm run build` and `npm publish` as separate steps after this.
  */
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
@@ -14,7 +14,6 @@ function computeVersion(): string {
     const now = new Date();
     const base = `${now.getUTCFullYear()}.${now.getUTCMonth() + 1}.${now.getUTCDate()}`;
 
-    // Check existing git tags for same-day publishes
     let existing: string[];
     try {
         const out = execFileSync("git", ["-C", packageRoot, "tag", "-l", `v${base}*`], {
@@ -38,20 +37,11 @@ function computeVersion(): string {
 }
 
 const version = computeVersion();
-console.log(`Publishing @matter/dcl-data@${version}`);
+console.log(`Preparing @matter/dcl-data@${version}`);
 
-// Write before npm publish so the workflow can read it even if a later step fails
 await writeFile(join(packageRoot, ".version"), version, "utf8");
 
 const pkgPath = join(packageRoot, "package.json");
 const pkg = JSON.parse(await readFile(pkgPath, "utf8")) as { version: string };
 pkg.version = version;
 await writeFile(pkgPath, JSON.stringify(pkg, null, 2) + "\n", "utf8");
-
-execFileSync("npm", ["run", "build"], { cwd: packageRoot, stdio: "inherit" });
-execFileSync("npm", ["publish", "--provenance", "--access", "public"], {
-    cwd: packageRoot,
-    stdio: "inherit",
-});
-
-console.log(`Published ${version}.`);

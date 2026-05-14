@@ -15,6 +15,7 @@
       "default": "./dist/node.js"
     }
   },
+  "publishConfig": { "access": "public" },
   "files": ["dist", "data", "manifest.json"],
   "scripts": {
     "build": "nacho-build",

@@ -48,9 +48,17 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         run: git pull --rebase origin main
 
+      - name: Prepare version
+        if: steps.changes.outputs.has_changes == 'true'
+        run: nacho-run tools/publish/prepare.ts
+
+      - name: Build
+        if: steps.changes.outputs.has_changes == 'true'
+        run: npm run build
+
       - name: Publish to npm
         if: steps.changes.outputs.has_changes == 'true'
-        run: nacho-run tools/publish/run.ts
+        run: npm publish --provenance
 
       - name: Read version
         if: steps.changes.outputs.has_changes == 'true'
@@ -83,7 +91,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh issue create \
-            --title "Nightly build failed" \
-            --label "nightly-failure" \
-            --body "Build failed. See: ${RUN_URL}"
+          if gh issue list --label "nightly-failure" --state open --json id --jq 'length' | grep -q '^0$'; then
+            gh issue create \
+              --title "Nightly build failed" \
+              --label "nightly-failure" \
+              --body "Build failed. See: ${RUN_URL}"
+          fi
