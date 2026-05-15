@@ -1,20 +1,14 @@
-/**
- * Nightly build entry point.
- * Fetches fresh DCL data, checks count tolerances against the previously-published package
- * (passed via BASELINE_DIR env var), diffs, writes data/ + summary.md.
- * Exits 0 with .no-changes sentinel when nothing changed (CI skips publish step).
- */
 import { readFile, writeFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { CdSignerEntry, Manifest, PaaRootEntry, VendorEntry } from "../../src/types.js";
-import { buildPackage } from "../../test/tools/build/package.js";
-import { checkCountTolerance } from "../../test/tools/verify/counts.js";
-import { diffDataSets, formatSummary } from "../diff/summary.js";
-import type { DataSet } from "../diff/summary.js";
-import { fetchDclData } from "../fetch/services.js";
+import { checkCountTolerance } from "./count-verifier.js";
+import { diffDataSets, formatSummary } from "./diff-summary.js";
+import type { DataSet } from "./diff-summary.js";
+import { fetchDclData } from "./fetch-services.js";
+import { buildPackage } from "./package-builder.js";
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "../..");
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "../../..");
 
 async function readJsonl<T>(path: string): Promise<T[]> {
     const text = await readFile(path, "utf8");

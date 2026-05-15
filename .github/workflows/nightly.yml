@@ -33,7 +33,7 @@ jobs:
       - name: Build snapshot
         env:
           BASELINE_DIR: /tmp/dcl-baseline/node_modules/@matter/dcl-data
-        run: nacho-run tools/build/run.ts
+        run: nacho-run tools/src/build-run.ts
 
       - name: Check for changes
         id: changes
@@ -50,7 +50,7 @@ jobs:
 
       - name: Prepare version
         if: steps.changes.outputs.has_changes == 'true'
-        run: nacho-run tools/publish/prepare.ts
+        run: nacho-run tools/src/prepare.ts
 
       - name: Build
         if: steps.changes.outputs.has_changes == 'true'

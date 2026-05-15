@@ -1,14 +1,9 @@
-/**
- * Nightly version prep.
- * Computes CalVer, bumps package.json, writes .version.
- * CI runs `npm run build` and `npm publish` as separate steps after this.
- */
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "../..");
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "../../..");
 
 function computeVersion(): string {
     const now = new Date();

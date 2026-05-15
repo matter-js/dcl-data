@@ -1,14 +1,5 @@
 {
-    "compilerOptions": {
-        "target": "es2022",
-        "module": "node16",
-        "moduleResolution": "node16",
-        "types": ["node"],
-        "noEmit": true,
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "isolatedModules": true
-    },
-    "include": ["**/*.ts"]
+    "compilerOptions": { "composite": true },
+    "files": [],
+    "references": [{ "path": "src" }]
 }
