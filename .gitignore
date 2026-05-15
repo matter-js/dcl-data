@@ -11,3 +11,4 @@ summary.md
 .idea/
 docs/
 tools/dist/
+tools/build/

@@ -9,12 +9,12 @@
     },
     "exports": {
         ".": {
-            "types": "./dist/types.d.ts",
-            "default": "./dist/types.js"
+            "types": "./dist/esm/types.d.ts",
+            "default": "./dist/esm/types.js"
         },
         "./node": {
-            "types": "./dist/node.d.ts",
-            "default": "./dist/node.js"
+            "types": "./dist/esm/node.d.ts",
+            "default": "./dist/esm/node.js"
         }
     },
     "publishConfig": {
