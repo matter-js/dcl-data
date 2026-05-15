@@ -1,0 +1,3 @@
+{"derHex":"308202aabb","kind":"production","role":"cd-signer","subjectKeyId":"aabbccdd001122334455667701cd"}
+{"derHex":"308202bbcc","kind":"production","role":"cd-signer","subjectKeyId":"bbccdd001122334455667702cd"}
+{"derHex":"308202ccdd","kind":"test","role":"cd-signer","subjectKeyId":"ccddeeff001122334455667703cd"}

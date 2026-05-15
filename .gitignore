@@ -1,0 +1,13 @@
+node_modules/
+dist/
+/build/
+*.tsbuildinfo
+data/
+manifest.json
+.no-changes
+.version
+summary.md
+.claude/
+.idea/
+docs/
+tools/dist/

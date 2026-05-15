@@ -1,0 +1,5 @@
+[
+  {"companyLegalName":"Acme Corporation LLC","kind":"production","vendorId":4096,"vendorName":"Acme Corp"},
+  {"kind":"production","vendorId":4097,"vendorName":"Beta Devices"},
+  {"kind":"test","vendorId":65521,"vendorName":"Test Vendor"}
+]
