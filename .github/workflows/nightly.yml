@@ -14,11 +14,11 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: npm
@@ -33,7 +33,7 @@ jobs:
       - name: Build snapshot
         env:
           BASELINE_DIR: /tmp/dcl-baseline/node_modules/@matter/dcl-data
-        run: nacho-run tools/src/build-run.ts
+        run: npx nacho-run tools/src/build-run.ts
 
       - name: Check for changes
         id: changes
@@ -50,7 +50,7 @@ jobs:
 
       - name: Prepare version
         if: steps.changes.outputs.has_changes == 'true'
-        run: nacho-run tools/src/prepare.ts
+        run: npx nacho-run tools/src/prepare.ts
 
       - name: Build
         if: steps.changes.outputs.has_changes == 'true'
@@ -79,7 +79,7 @@ jobs:
 
       - name: Create GitHub Release
         if: steps.changes.outputs.has_changes == 'true'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: ${{ steps.version.outputs.version }}
