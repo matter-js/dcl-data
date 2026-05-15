@@ -24,6 +24,11 @@ export type VendorEntry = {
     companyPreferredName?: string;
     vendorLandingPageURL?: string;
     creator?: string;
+    /**
+     * Currently always "production". DCL exposes no test-net vendor source — `DclVendorInfoService`
+     * fetches prod only. Field kept for API symmetry with cert entries; may classify Matter-reserved
+     * test vendor IDs (0xFFF1–0xFFF4) in the future.
+     */
     kind: "production" | "test";
     [extra: string]: unknown; // preserve unknown DCL fields — forward-compat
 };
@@ -41,6 +46,7 @@ export type Manifest = {
         cdSigners: number;
         cdSignersTest: number;
         vendors: number;
+        /** Currently always 0 — see {@link VendorEntry.kind}. */
         vendorsTest: number;
     };
 };
