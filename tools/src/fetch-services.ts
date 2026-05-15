@@ -1,4 +1,6 @@
+import { Crypto } from "@matter/general";
 import { Environment, MockStorageService } from "@matter/main";
+import { NodeJsCrypto } from "@matter/nodejs";
 import { DclCertificateService, DclVendorInfoService } from "@matter/protocol";
 import type { CdSignerEntry, PaaRootEntry, VendorEntry } from "../../src/types.js";
 
@@ -14,6 +16,7 @@ function toHex(bytes: Uint8Array): string {
 
 export async function fetchDclData(): Promise<FetchResult> {
     const env = new Environment("dcl-fetch");
+    env.set(Crypto, new NodeJsCrypto());
     new MockStorageService(env);
 
     const certService = new DclCertificateService(env, {
