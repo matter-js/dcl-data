@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { mkdtemp, rm, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";

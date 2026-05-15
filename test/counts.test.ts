@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { checkCountTolerance } from "./tools/verify/counts.js";
 
 describe("checkCountTolerance", () => {

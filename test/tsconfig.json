@@ -3,7 +3,7 @@
 {
     "extends": "../tsc/tsconfig.test.json",
     "compilerOptions": {
-        "types": ["node", "mocha", "chai"]
+        "types": ["mocha", "node", "@matter/testing"]
     },
     "include": ["**/*.ts"],
     "references": [{ "path": "../src" }]
