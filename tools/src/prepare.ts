@@ -39,4 +39,4 @@ await writeFile(join(packageRoot, ".version"), version, "utf8");
 const pkgPath = join(packageRoot, "package.json");
 const pkg = JSON.parse(await readFile(pkgPath, "utf8")) as { version: string };
 pkg.version = version;
-await writeFile(pkgPath, JSON.stringify(pkg, null, 2) + "\n", "utf8");
+await writeFile(pkgPath, JSON.stringify(pkg, null, 4) + "\n", "utf8");
