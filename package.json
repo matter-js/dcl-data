@@ -23,7 +23,8 @@
     "files": [
         "dist",
         "data",
-        "manifest.json"
+        "manifest.json",
+        "LICENSE"
     ],
     "scripts": {
         "build": "nacho-build",
