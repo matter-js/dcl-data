@@ -1,6 +1,6 @@
 {
     "name": "@matter/dcl-data",
-    "version": "2026.5.15.1",
+    "version": "2026.5.20",
     "type": "module",
     "description": "Daily snapshot of Matter DCL data for seeding matter.js services",
     "license": "Apache-2.0",
