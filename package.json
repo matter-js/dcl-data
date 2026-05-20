@@ -4,6 +4,10 @@
     "type": "module",
     "description": "Daily snapshot of Matter DCL data for seeding matter.js services",
     "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/matter-js/dcl-data.git"
+    },
     "engines": {
         "node": ">=18"
     },
