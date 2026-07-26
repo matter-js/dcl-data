@@ -33,7 +33,7 @@ describe("paaRoots", () => {
     it("excludes test entries by default", async () => {
         const entries: Array<{ kind: string }> = [];
         for await (const e of paaRoots({ packageRoot: fixturesRoot }).entries) {
-            entries.push(e as { kind: string });
+            entries.push(e);
         }
         expect(entries).to.have.length(3);
         expect(entries.every(e => e.kind !== "test")).to.equal(true);
@@ -110,7 +110,7 @@ describe("vendors", () => {
     it("yields production vendors by default", async () => {
         const entries: Array<{ kind: string }> = [];
         for await (const e of vendors({ packageRoot: fixturesRoot }).entries) {
-            entries.push(e as { kind: string });
+            entries.push(e);
         }
         expect(entries).to.have.length(2);
         expect(entries.every(e => e.kind !== "test")).to.equal(true);
