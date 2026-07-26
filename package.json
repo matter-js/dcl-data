@@ -51,10 +51,10 @@
         "@nacho-iot/js-tools": "^0.1.7",
         "@types/chai": "^4.3.20",
         "@types/mocha": "^10.0.10",
-        "@types/node": "^26.1.0",
-        "oxfmt": "^0.58.0",
-        "oxlint": "^1.72.0",
-        "oxlint-tsgolint": "^0.24.0",
+        "@types/node": "^26.1.1",
+        "oxfmt": "^0.60.0",
+        "oxlint": "^1.75.0",
+        "oxlint-tsgolint": "^7.0.2001",
         "typescript": "^6.0.3"
     }
 }
