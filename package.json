@@ -48,13 +48,13 @@
     "devDependencies": {
         "@matter/main": "dev",
         "@matter/testing": "dev",
-        "@nacho-iot/js-tools": "^0.1.7",
+        "@nacho-iot/js-tools": "^0.2.0",
         "@types/chai": "^4.3.20",
         "@types/mocha": "^10.0.10",
         "@types/node": "^26.1.2",
-        "oxfmt": "^0.61.0",
-        "oxlint": "^1.76.0",
+        "oxfmt": "^0.62.0",
+        "oxlint": "^1.77.0",
         "oxlint-tsgolint": "^7.0.2001",
-        "typescript": "^6.0.3"
+        "typescript": "^7.0.2"
     }
 }
